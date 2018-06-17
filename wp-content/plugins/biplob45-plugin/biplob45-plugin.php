@@ -22,3 +22,14 @@ You should have received a copy of the GNU General Public License along with thi
 
 Copyright 2005-2015 Automatic, Inc.
 */
+
+if ( ! defined('ABSPATH')) {
+	die;
+}
+
+defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, you silly human!' );
+
+if ( ! function_exists( 'add_action' ) ) {
+	echo 'Hey, you can\t access this file, you silly human!';
+	exit;
+}
