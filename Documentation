@@ -1,0 +1,32 @@
+Wordpress Plugin Development:
+
+1.Create a WordPress Plugin from Scratch - Part 1:
+
+Change this in wp-config-sample.php false  to true:
+    define('WP_DEBUG', true);
+
+Or, Direct copy and paste code and rename wp-config-sample.php to wp-config.php
+
+Before creating plugin, check its name.
+
+Now create a folder with plugin name:  "biplob45-plugin"
+Now create biplob45-plugin.php file and write this code:
+<?php
+/**
+*  @package Biplob45Plugin
+*/
+/*
+Plugin Name: Biplob45 Plugin
+Plugin URI: https://github.com/Biplob45/WordPress-Plugin-Development
+Description: This is my first attempt on writing a custom plugin.
+Version: 1.0.0
+Author: Md.Badiuzzaman "Biplob45" Biplob
+Author URI: https://github.com/Biplob45/WordPress-Plugin-Development
+License: GPLv2 or later
+Text Domain: biplob45-plugin
+*/  
+
+
+
+
+For Security the plugin,again create a file index.php:
