@@ -46,19 +46,29 @@ class Biplob45Plugin
 	}
 	*/
 
+	function __construct() {
+		add_action( 'init', array( $this, 'custom_post_type' ) );
+	}
+
 	function activate() {
 		// generated a custom post type
+		$this->custom_post_type();
 		// flush rewrite rules
-		echo 'This plugin is actice';
+		flush_rewrite_rules();
 	}
 
 	function deactivate() {
 		// flush rewrite rules
+		flush_rewrite_rules();
 	}
 
 	function uninstall() {
 		// delete custom post type
 		// delete all the plugin data from the DB
+	}
+
+	function custom_post_type() {
+		register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
 	}
 }
 
