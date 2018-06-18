@@ -23,13 +23,58 @@ You should have received a copy of the GNU General Public License along with thi
 Copyright 2005-2015 Automatic, Inc.
 */
 
+/*
 if ( ! defined('ABSPATH')) {
 	die;
 }
+*/
 
 defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, you silly human!' );
 
+/*
 if ( ! function_exists( 'add_action' ) ) {
 	echo 'Hey, you can\t access this file, you silly human!';
 	exit;
 }
+*/
+
+class Biplob45Plugin
+{
+	/*
+	function __construct($string) {
+		echo $string;
+	}
+	*/
+
+	function activate() {
+		// generated a custom post type
+		// flush rewrite rules
+		echo 'This plugin is actice';
+	}
+
+	function deactivate() {
+		// flush rewrite rules
+	}
+
+	function uninstall() {
+		// delete custom post type
+		// delete all the plugin data from the DB
+	}
+}
+
+
+if ( class_exists( 'Biplob45Plugin' ) ){
+//$biplob45plugin = new Biplob45Plugin('Biplob45 Plugin Initialized');
+  $biplob45plugin = new Biplob45Plugin();
+}
+
+// activation
+
+register_activation_hook( __FILE__, array( $biplob45plugin, 'activate' ) );
+
+// deactivation
+
+register_deactivation_hook( __FILE__, array( $biplob45plugin, 'deactivate' ) );
+
+
+// uninstallation
