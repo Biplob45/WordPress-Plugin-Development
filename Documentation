@@ -180,3 +180,8 @@ $biplob45plugin->register();
 
 If you want this style to be enqueued front end of our website  not the backend  just simply replace the admin_enqueue_scripts with the wp_enqueue_scripts.
 
+
+
+//Public:  can be accessed everywhere
+//Protected: can be accessed only within the class itself or extensions of that class
+//Private: can be accessed only within the class itself

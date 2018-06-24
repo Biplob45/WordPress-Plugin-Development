@@ -46,10 +46,6 @@ class Biplob45Plugin
 	}
 	*/
 
-	function __construct() {
-		add_action( 'init', array( $this, 'custom_post_type' ) );
-	}
-
 	function register() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		
@@ -79,8 +75,9 @@ class Biplob45Plugin
 */
 
 
-	function custom_post_type() {
-		register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
+	protected function custom_post_type() {
+		//register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
+		add_action( 'init', array( $this, 'custom_post_type' ) );
 	}
 
 
@@ -96,11 +93,14 @@ class Biplob45Plugin
 }
 
 
+
 if ( class_exists( 'Biplob45Plugin' ) ){
 //$biplob45plugin = new Biplob45Plugin('Biplob45 Plugin Initialized');
   $biplob45plugin = new Biplob45Plugin();
   $biplob45plugin->register();
 }
+
+
 
 // activation
 
