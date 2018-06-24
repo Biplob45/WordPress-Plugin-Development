@@ -145,3 +145,38 @@ global $wpdb;
 $wpdb->query( "DELETE FROM wp_posts WHERE post_type = 'book'" );
 $wpdb->query( "DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)" );
 $wpdb->query( "DELETE FROM wp_term_relationships WHERE object_id NOT IN (SELECT id FROM wp_posts)" );
+
+
+
+
+
+WordPress Plugin Development - Part 6 - Enqueue Admin Scripts:
+
+Create a new folder in wp-content/plugins/biplob45-plugin:
+Folder name: assets
+and create this two file:
+mystyle.css
+myscript.js
+
+
+Now add this code in biplob45-plugin.php:
+
+
+function register() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+	}
+
+
+function enqueue() {
+		// enqueue all our scripts.
+        wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/mystyle.css', __FILE__ ) );
+        wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/myscript.js', __FILE__ ) );
+	}
+
+
+
+$biplob45plugin->register();
+
+
+If you want this style to be enqueued front end of our website  not the backend  just simply replace the admin_enqueue_scripts with the wp_enqueue_scripts.
+

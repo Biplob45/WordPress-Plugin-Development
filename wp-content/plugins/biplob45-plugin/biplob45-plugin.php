@@ -50,6 +50,15 @@ class Biplob45Plugin
 		add_action( 'init', array( $this, 'custom_post_type' ) );
 	}
 
+	function register() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		
+		// If you want this style to be enqueued front end of our website  not the backend  just simply  replace the admin_enqueue_scripts with the wp_enqueue_scripts.
+
+		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+	}
+
+
 	function activate() {
 		// generated a custom post type
 		$this->custom_post_type();
@@ -73,12 +82,24 @@ class Biplob45Plugin
 	function custom_post_type() {
 		register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
 	}
+
+
+	function enqueue() {
+		// enqueue all our scripts
+		wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/mystyle.css', __FILE__ ) );
+		wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/myscript.js', __FILE__ ) );
+	}
+
+
+
+
 }
 
 
 if ( class_exists( 'Biplob45Plugin' ) ){
 //$biplob45plugin = new Biplob45Plugin('Biplob45 Plugin Initialized');
   $biplob45plugin = new Biplob45Plugin();
+  $biplob45plugin->register();
 }
 
 // activation
