@@ -31,6 +31,9 @@ if ( ! defined('ABSPATH')) {
 
 defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, you silly human!' );
 
+
+if ( !class_exists( 'Biplob45Plugin' ) ){
+
 /*
 if ( ! function_exists( 'add_action' ) ) {
 	echo 'Hey, you can\t access this file, you silly human!';
@@ -45,7 +48,16 @@ class Biplob45Plugin
 		echo $string;
 	}
 	*/
+/*
+	public static function register() {
+		add_action( 'admin_enqueue_scripts', array( 'Biplob45Plugin', 'enqueue' ) );
+		
+		// If you want this style to be enqueued front end of our website  not the backend  just simply  replace the admin_enqueue_scripts with the wp_enqueue_scripts.
 
+		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+	}
+
+*/
 	function register() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		
@@ -55,7 +67,10 @@ class Biplob45Plugin
 	}
 
 
+/*  Remove this two method and create  two file ...
 	function activate() {
+		require_once plugin_dir_path( __FILE__ ) . 'inc/biplob45-plugin-activate.php';
+		Biplob45PluginActivate::activate();
 		// generated a custom post type
 		$this->custom_post_type();
 		// flush rewrite rules
@@ -66,6 +81,7 @@ class Biplob45Plugin
 		// flush rewrite rules
 		flush_rewrite_rules();
 	}
+*/
 
 /*
 	function uninstall() {
@@ -81,7 +97,8 @@ class Biplob45Plugin
 	}
 
 
-	function enqueue() {
+	//static function enqueue() 
+	static function enqueue() {
 		// enqueue all our scripts
 		wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/mystyle.css', __FILE__ ) );
 		wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/myscript.js', __FILE__ ) );
@@ -94,23 +111,31 @@ class Biplob45Plugin
 
 
 
-if ( class_exists( 'Biplob45Plugin' ) ){
-//$biplob45plugin = new Biplob45Plugin('Biplob45 Plugin Initialized');
+// if ( class_exists( 'Biplob45Plugin' ) ){
+// $biplob45plugin = new Biplob45Plugin('Biplob45 Plugin Initialized');
   $biplob45plugin = new Biplob45Plugin();
   $biplob45plugin->register();
-}
+
+  //Biplob45Plugin::register();
+//}
 
 
 
 // activation
+require_once plugin_dir_path( __FILE__ ) . 'inc/biplob45-plugin-activate.php';
 
-register_activation_hook( __FILE__, array( $biplob45plugin, 'activate' ) );
+//register_activation_hook( __FILE__, array( $biplob45plugin, 'activate' ) );
+register_activation_hook( __FILE__, array( 'Biplob45PluginActivate' , 'activate' ) );
 
 // deactivation
+require_once plugin_dir_path( __FILE__ ) . 'inc/biplob45-plugin-deactivate.php';
 
-register_deactivation_hook( __FILE__, array( $biplob45plugin, 'deactivate' ) );
+//register_deactivation_hook( __FILE__, array( $biplob45plugin, 'deactivate' ) );
+register_deactivation_hook( __FILE__, array( 'Biplob45PluginDeactivate', 'deactivate' ) );
 
 /*
 //uninstall
 register_uninstall_hook( __FILE__, array( $biplob45plugin, 'uninstall' ) );
 */
+
+}
